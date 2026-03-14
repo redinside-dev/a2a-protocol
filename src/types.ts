@@ -1,7 +1,7 @@
 export enum MessageType {
-  Request = "request",
-  Response = "response",
-  Notify = "notify",
+  REQUEST = "request",
+  RESPONSE = "response",
+  NOTIFY = "notify"
 }
 
 export interface A2AMessage {
@@ -13,4 +13,4 @@ export interface A2AMessage {
   timestamp: string;
 }
 
-export type MessageHandler = (msg: A2AMessage) => Promise<unknown> | unknown;
+export type A2AHandler = (msg: A2AMessage) => Promise<unknown> | unknown;

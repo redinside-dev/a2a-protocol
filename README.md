@@ -1,25 +1,22 @@
 # a2a-protocol
 
-Lightweight TypeScript protocol for agent-to-agent messages over HTTP.
+Lightweight TypeScript protocol for agent-to-agent request/response and broadcast.
 
-## Install
-
-```bash
-git clone https://github.com/redinside-dev/a2a-protocol.git
-cd a2a-protocol
-npm install
-npm run demo
-```
+## Setup
+1. `npm install`
+2. `npm start`
 
 ## Usage
-
 ```ts
-const protocol = new A2AProtocol("agent-A");
-protocol.on(MessageType.Request, (msg) => `echo:${String(msg.payload)}`);
-protocol.listen(3001);
-await protocol.send("127.0.0.1", 3001, {
-  id: "1", from: "agent-A", to: "agent-A", type: MessageType.Request, payload: "hello"
-});
+import { A2AProtocol } from "./src/protocol";
+import { MessageType } from "./src/types";
+
+const protocol = new A2AProtocol();
+protocol.on(MessageType.REQUEST, (msg) => ({ ok: true, echo: msg.payload }));
+protocol.listen(7002);
 ```
 
-Running `npm run demo` prints `agent-B received: hello`.
+## Example
+Run `npm start` to execute `example/two-agents.ts`.
+Expected output includes:
+- `agent-B received: hello`
